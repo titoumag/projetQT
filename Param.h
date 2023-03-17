@@ -8,10 +8,18 @@
 
 #include <QWidget>
 
+class QSlider;
+class QLabel;
 class Param : public QWidget{
+Q_OBJECT
 public:
     Param(const char *texte, int min, int max,int defaut);
     QSlider *widget;
+    QLabel *valeur;
+    int val;
+    int getVal() const;
+public slots:
+    void setVal(int val);
 };
 
 

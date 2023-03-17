@@ -9,7 +9,7 @@
 #include "Board.h"
 
 Board::Board(int nb_joueur, int puissance, int width) {
-    newGame(nb_joueur,puissance,width);
+    heigth=8;
 }
 
 void Board::paintEvent(QPaintEvent *event) {
@@ -21,11 +21,11 @@ void Board::paintEvent(QPaintEvent *event) {
     painter.setBrush(Qt::darkBlue);
     painter.drawRect(0, 0, rect.width(), rect.height());
 
-    const Qt::GlobalColor colors[5] = {Qt::red, Qt::yellow, Qt::green, Qt::white,Qt::GlobalColor::magenta};
-    for (int i = 0; i < 10; ++i) {
+    const Qt::GlobalColor colors[5] = {Qt::red, Qt::yellow, Qt::green, Qt::white,Qt::magenta};
+    for (int i = 0; i < width; ++i) {
         for (int j = 0; j < 8; ++j) {
             painter.setBrush(colors[(int)tab[i][j]]);
-            painter.drawEllipse((i*rect.width())/10+2,(j*rect.height())/8,(rect.height())/8-4,(rect.height())/8-4);
+            painter.drawEllipse((i*rect.width())/width+2,(j*rect.height())/8,(rect.height())/8-4,(rect.height())/8-4);
         }
     }
 
@@ -100,7 +100,7 @@ bool Board::gagne(){
 
 bool Board::verif(int x,int j,int dx, int dy){
     for (int i = 0; i < puissance; ++i) {
-        if (tab[x+i*dx][j+i*dy]!=joueur)
+        if (x+i*dx>=width || j+i*dy>=heigth || j+i*dy<0 || tab[x+i*dx][j+i*dy]!=joueur)
             return false;
     }
     for (int i = 0; i < puissance; ++i) {
@@ -114,11 +114,12 @@ void Board::newGame(int nb_joueur, int puissance, int width) {
     this->nb_joueur=nb_joueur;
     this->puissance=puissance;
     this->width=width;
-    tab = std::vector<Color[8]>(10);
-    for (int i = 0; i < 10; i++) {
+    tab = std::vector<Color[8]>(width);
+    for (int i = 0; i < width; i++) {
         for (int j = 0; j < 8; j++) {
             tab[i][j] = Color::NONE;
         }
     }
     joueur=Color::RED;
+    update();
 }

@@ -16,7 +16,6 @@ Windows::Windows() {
 //    widgetCentral->setLayout(layout);
 //    widgetCentral->resize(550, 450);
     auto* layout = new QGridLayout(this);
-    int nbcol=10;
 
      auto* label = new QLabel("Puissance 4");
     label->setAlignment(Qt::AlignCenter);
@@ -25,10 +24,16 @@ Windows::Windows() {
 
     auto *vbox = new QVBoxLayout();
     layout->addLayout(vbox, 1, 2, 2, 1);
+    listeParam = new Param*[]{
+            new Param("Nb de colonne :", 5, 15,10),
+            new Param("Nb de joueur :", 2,4,2),
+            new Param("Nb de pion a aligner :", 3,6,4)
+    };
     vbox->addWidget(new QLabel("Paramètres :"));
-    vbox->addWidget(new Param("Nb de colonne :", 5, 15,10));
-    vbox->addWidget(new Param("Nb de joueur :", 2,4,2));
-    vbox->addWidget(new Param("Nb de pion a aligner :", 3,6,4));
+    for (int i = 0; i < 3; ++i) {
+        vbox->addWidget(listeParam[i]);
+    }
+
     newGameButton = new QPushButton("Nouvelle partie");
     connect(newGameButton, &QPushButton::pressed, this, &Windows::newGame);
     vbox->addWidget(newGameButton);
@@ -40,21 +45,29 @@ Windows::Windows() {
     layout->addWidget(board, 1, 0, 1, 1);
 
 //    buttonCol = std::vector<QPushButton*>();
-    auto *hbox = new QHBoxLayout();
+    hbox = new QHBoxLayout();
     layout->addLayout(hbox, 3, 0, 1, 1);
-    for (int i = 0; i < nbcol; i++) {
+
+    setWindowTitle("Puissance 4");
+    newGame();
+
+}
+
+void Windows::newGame() {
+    int width = listeParam[0]->getVal();
+    board->newGame(listeParam[1]->getVal(),listeParam[2]->getVal(),width);
+
+    while (hbox->count() > 0) {
+        auto* item = hbox->takeAt(0);
+        delete item->widget();
+        delete item;
+    }
+    for (int i = 0; i < width; i++) {
         auto* button = new QPushButton(QString::number(i+1));
         button->setFixedHeight(40);
         button->setFixedWidth(41);
         hbox->addWidget(button);
         connect(button, &QPushButton::pressed, this, [=](){board->addPiece(i);});
-//        buttonCol.push_back(button);
     }
-
-    setWindowTitle("Puissance 4");
-}
-
-void Windows::newGame() {
-    board->newGame(2,4,10);
 }
 

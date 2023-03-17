@@ -9,10 +9,12 @@
 #include <QMainWindow>
 #include <QLCDNumber>
 #include <QSlider>
+#include <QHBoxLayout>
 #include "Board.h"
+#include "Param.h"
 
 class QPushButton;
-//class Windows : public QMainWindow{
+
 class Windows : public QWidget{
 public :
     Windows();
@@ -24,8 +26,13 @@ private:
     Board *board;
     QPushButton *newGameButton;
     QPushButton *quit;
-    std::vector<QPushButton*> buttonCol;
-    QSlider *widthS;
+//    std::vector<QPushButton*> buttonCol;
+    QHBoxLayout* hbox;
+    Param** listeParam;
+
+//    int width;
+//    int nb_joueur;
+//    int puissance;
 };
 
 
