@@ -11,6 +11,7 @@ Param::Param(const char *texte, int min, int max,int defaut) {
     auto *layout = new QGridLayout(this);
     setLayout(layout);
     this->val = defaut;
+    this->defaultVal = defaut;
 
     layout->addWidget(new QLabel(texte),0,0);
 
@@ -29,8 +30,13 @@ Param::Param(const char *texte, int min, int max,int defaut) {
 void Param::setVal(int val) {
     valeur->setNum(val);
     this->val = val;
+    widget->setValue(val);
 }
 
 int Param::getVal() const {
     return val;
+}
+
+void Param::defautParam() {
+    setVal(defaultVal);
 }

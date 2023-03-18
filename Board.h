@@ -12,15 +12,16 @@ enum class Color{
     RED,
     YELLOW,
     GREEN,
+    ORANGE,
     NONE,
     FINISH
 };
 
 class Board : public QFrame{
 public:
-    Board(int nb_joueur, int puissance, int width);
+    Board() = default;
     void paintEvent(QPaintEvent *event) override;
-    void newGame(int nb_joueur, int puissance, int width);
+    void newGame(int nb_joueur, int puissance, int width, int heigth);
 
 public slots:
     void addPiece(int col);
@@ -31,11 +32,14 @@ private:
     int width;
 
     int heigth=8;
-    std::vector<Color[8]> tab;
+    std::vector<std::vector<Color>> tab;
     Color joueur=Color::RED;
     bool gagne();
 
     bool verif(int x, int j, int dx, int dy);
+
+protected:
+    void mousePressEvent(QMouseEvent *event) override;
 };
 
 

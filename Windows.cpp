@@ -23,25 +23,37 @@ Windows::Windows() {
 
 
     auto *vbox = new QVBoxLayout();
-    layout->addLayout(vbox, 1, 2, 2, 1);
-    listeParam = new Param*[]{
-            new Param("Nb de colonne :", 5, 15,10),
+    layout->addLayout(vbox, 1, 1, 2, 1);
+    listeParam = new Param*[NB_PARAM]{
             new Param("Nb de joueur :", 2,4,2),
-            new Param("Nb de pion a aligner :", 3,6,4)
+            new Param("Nb de pion a aligner :", 3,6,4),
+            new Param("Nb de colonne :", 5, 15,10),
+            new Param("Nb de ligne :", 5, 12,8)
     };
     vbox->addWidget(new QLabel("Paramètres :"));
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < NB_PARAM; ++i) {
+        listeParam[i]->setFixedWidth(200);
         vbox->addWidget(listeParam[i]);
     }
 
     newGameButton = new QPushButton("Nouvelle partie");
+    newGameButton->setFixedWidth(200);
     connect(newGameButton, &QPushButton::pressed, this, &Windows::newGame);
     vbox->addWidget(newGameButton);
+
+    auto* resertParam = new QPushButton("Réinitialiser les paramètres");
+    resertParam->setFixedWidth(200);
+    connect(resertParam, &QPushButton::pressed, [=](){
+        for (int i = 0; i < NB_PARAM; ++i) {
+            listeParam[i]->defautParam();
+        }
+    });
+    vbox->addWidget(resertParam);
     vbox->addStretch();
 
 
-    board = new Board(2, 4, 10);
-    board->setFixedSize(500, 400);
+    board = new Board();
+//    board->setFixedSize(500, 400);
     layout->addWidget(board, 1, 0, 1, 1);
 
 //    buttonCol = std::vector<QPushButton*>();
@@ -50,12 +62,11 @@ Windows::Windows() {
 
     setWindowTitle("Puissance 4");
     newGame();
-
 }
 
 void Windows::newGame() {
-    int width = listeParam[0]->getVal();
-    board->newGame(listeParam[1]->getVal(),listeParam[2]->getVal(),width);
+    int width = getVal(WIDTH);
+    board->newGame(getVal(NB_JOUEUR),getVal(PUISSANCE),width,getVal(HEIGTH));
 
     while (hbox->count() > 0) {
         auto* item = hbox->takeAt(0);
@@ -69,5 +80,9 @@ void Windows::newGame() {
         hbox->addWidget(button);
         connect(button, &QPushButton::pressed, this, [=](){board->addPiece(i);});
     }
+}
+
+int Windows::getVal(int i) const {
+    return listeParam[i]->getVal();
 }
 

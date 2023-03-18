@@ -17,9 +17,13 @@ public:
     QSlider *widget;
     QLabel *valeur;
     int val;
+    int defaultVal;
     int getVal() const;
+    void defautParam();
+
 public slots:
     void setVal(int val);
+
 };
 
 

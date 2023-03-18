@@ -6,10 +6,23 @@
 #include <QLabel>
 #include <QPainter>
 #include <iostream>
+#include <QMouseEvent>
 #include "Board.h"
 
-Board::Board(int nb_joueur, int puissance, int width) {
-    heigth=8;
+void Board::newGame(int nb_joueur, int puissance, int width, int heigth) {
+    this->nb_joueur=nb_joueur;
+    this->puissance=puissance;
+    this->width=width;
+    this->heigth=heigth;
+    setFixedSize(width*50, heigth*50);
+    tab = std::vector<std::vector<Color>>(width,std::vector(heigth,Color::NONE));
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < heigth; j++) {
+            tab[i][j] = Color::NONE;
+        }
+    }
+    joueur=Color::RED;
+    update();
 }
 
 void Board::paintEvent(QPaintEvent *event) {
@@ -21,22 +34,25 @@ void Board::paintEvent(QPaintEvent *event) {
     painter.setBrush(Qt::darkBlue);
     painter.drawRect(0, 0, rect.width(), rect.height());
 
-    const Qt::GlobalColor colors[5] = {Qt::red, Qt::yellow, Qt::green, Qt::white,Qt::magenta};
+    const Qt::GlobalColor colors[6] = {Qt::red, Qt::yellow, Qt::green,Qt::magenta, Qt::white,Qt::black};
     for (int i = 0; i < width; ++i) {
-        for (int j = 0; j < 8; ++j) {
+        for (int j = 0; j < heigth; ++j) {
             painter.setBrush(colors[(int)tab[i][j]]);
-            painter.drawEllipse((i*rect.width())/width+2,(j*rect.height())/8,(rect.height())/8-4,(rect.height())/8-4);
+            painter.drawEllipse((i*rect.width())/width+2,(j*rect.height())/heigth,(rect.height())/heigth-4,(rect.height())/heigth-4);
         }
     }
 
     painter.end();
 }
 
+void Board::mousePressEvent(QMouseEvent *event) {
+    addPiece(event->pos().x()/50);
+}
+
 void Board::addPiece(int col) {
     int y=0;
     while(tab[col][y+1]==Color::NONE && y<heigth-1)
         y++;
-    std::cout<<y<<std::endl;
     if (tab[col][y]==Color::NONE){
         tab[col][y]=joueur;
         update();
@@ -48,8 +64,6 @@ void Board::addPiece(int col) {
 }
 
 bool Board::gagne(){
-    std::cout<<puissance<<std::endl;
-    std::cout<<(int)joueur<<std::endl;
     for(int i=0;i<width;i++)
         for(int j=0;j<heigth;j++) {
             if (verif(i,j,1,0) || verif(i,j,0,1) || verif(i,j,1,1) || verif(i,j,1,-1))
@@ -108,18 +122,4 @@ bool Board::verif(int x,int j,int dx, int dy){
     }
     std::cout << "gagne"<<std::endl;
     return true;
-}
-
-void Board::newGame(int nb_joueur, int puissance, int width) {
-    this->nb_joueur=nb_joueur;
-    this->puissance=puissance;
-    this->width=width;
-    tab = std::vector<Color[8]>(width);
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < 8; j++) {
-            tab[i][j] = Color::NONE;
-        }
-    }
-    joueur=Color::RED;
-    update();
 }

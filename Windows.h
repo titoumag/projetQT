@@ -13,8 +13,15 @@
 #include "Board.h"
 #include "Param.h"
 
-class QPushButton;
+enum dim{
+    NB_JOUEUR,
+    PUISSANCE,
+    WIDTH,
+    HEIGTH
+};
+#define NB_PARAM 4
 
+class QPushButton;
 class Windows : public QWidget{
 public :
     Windows();
@@ -30,9 +37,7 @@ private:
     QHBoxLayout* hbox;
     Param** listeParam;
 
-//    int width;
-//    int nb_joueur;
-//    int puissance;
+    int getVal(int i) const;
 };
 
 
