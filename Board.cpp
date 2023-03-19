@@ -7,6 +7,9 @@
 #include <QPainter>
 #include <iostream>
 #include <QMouseEvent>
+#include <QCoreApplication>
+#include <QEventLoop>
+#include <QTimer>
 #include "Board.h"
 
 void Board::newGame(int nb_joueur, int puissance, int width, int heigth) {
@@ -14,6 +17,7 @@ void Board::newGame(int nb_joueur, int puissance, int width, int heigth) {
     this->puissance=puissance;
     this->width=width;
     this->heigth=heigth;
+    canPlay=false;
     setFixedSize(width*50, heigth*50);
     tab = std::vector<std::vector<Color>>(width,std::vector(heigth,Color::NONE));
     for (int i = 0; i < width; i++) {
@@ -50,64 +54,44 @@ void Board::mousePressEvent(QMouseEvent *event) {
 }
 
 void Board::addPiece(int col) {
-    int y=0;
-    while(tab[col][y+1]==Color::NONE && y<heigth-1)
-        y++;
-    if (tab[col][y]==Color::NONE){
-        tab[col][y]=joueur;
+    if (canPlay) return;
+    canPlay=true;
+    colTemp=col;
+    ligneTemp=-1;
+    addPieceTimer();
+}
+
+void Board::addPieceTimer(){
+    if (ligneTemp!=-1)
+        tab[colTemp][ligneTemp]=Color::NONE;
+    if (tab[colTemp][ligneTemp+1]==Color::NONE && ligneTemp<heigth-1){
+        tab[colTemp][ligneTemp+1]=joueur;
+        ligneTemp++;
         update();
-        if (!gagne())
-            joueur = (Color)(((int)joueur+1)%nb_joueur);
-        else
+        QTimer::singleShot(100, this, &Board::addPieceTimer);
+    }else{
+        int y=ligneTemp;
+        if (tab[colTemp][y]==Color::NONE){
+            tab[colTemp][y]=joueur;
             update();
+            if (!gagne()) {
+                joueur = (Color) (((int) joueur + 1) % nb_joueur);
+                canPlay=false;
+            }else {
+                emit win(joueur);
+                canPlay=true;
+                update();
+            }
+        }
     }
 }
+
 
 bool Board::gagne(){
     for(int i=0;i<width;i++)
         for(int j=0;j<heigth;j++) {
             if (verif(i,j,1,0) || verif(i,j,0,1) || verif(i,j,1,1) || verif(i,j,1,-1))
                 return true;
-            /*switch(puissance) {
-                case 3:
-                    if ((tab[i][j]==joueur &&tab[i][j+1]==joueur &&tab[i][j+2]==joueur) ||
-                        (tab[i][j]==joueur &&tab[i+1][j]==joueur &&tab[i+2][j]==joueur) ||
-                        (tab[i][j]==joueur &&tab[i+1][j+1]==joueur &&tab[i+2][j+2]==joueur) ||
-                        (tab[i+2][j]==joueur &&tab[i+1][j+1]==joueur &&tab[i][j+2]==joueur)){
-                            tab[i+2][j]=Color::FINISH;
-                            tab[i+1][j+1]=Color::FINISH;
-                            tab[i][j+2]=Color::FINISH;
-                        return true;
-                    }
-                    break;
-
-                case 4:
-                    if ((tab[i][j]==joueur &&tab[i][j+1]==joueur &&tab[i][j+2]==joueur &&tab[i][j+3]==joueur) ||
-                        (tab[i][j]==joueur &&tab[i+1][j]==joueur &&tab[i+2][j]==joueur &&tab[i+3][j]==joueur) ||
-                        (tab[i][j]==joueur &&tab[i+1][j+1]==joueur &&tab[i+2][j+2]==joueur &&tab[i+3][j+3]==joueur) ||
-                        (tab[i+3][j]==joueur &&tab[i+2][j+1]==joueur &&tab[i+1][j+2]==joueur &&tab[i][j+3]==joueur)){
-                            tab[i+3][j]=Color::FINISH;
-                            tab[i+2][j+1]=Color::FINISH;
-                            tab[i+1][j+2]=Color::FINISH;
-                            tab[i][j+3]=Color::FINISH;
-                        return true;
-                    }
-                    break;
-
-                case 5:
-                    if ((tab[i][j]==joueur &&tab[i][j+1]==joueur &&tab[i][j+2]==joueur &&tab[i][j+3]==joueur &&tab[i][j+4]==joueur) ||
-                        (tab[i][j]==joueur &&tab[i+1][j]==joueur &&tab[i+2][j]==joueur &&tab[i+3][j]==joueur &&tab[i+4][j]==joueur) ||
-                        (tab[i][j]==joueur &&tab[i+1][j+1]==joueur &&tab[i+2][j+2]==joueur &&tab[i+3][j+3]==joueur &&tab[i+4][j+4]==joueur) ||
-                        (tab[i+4][j]==joueur &&tab[i+3][j+1]==joueur &&tab[i+2][j+2]==joueur &&tab[i+1][j+3]==joueur &&tab[i][j+4]==joueur)){
-                            tab[i+4][j]=Color::FINISH;
-                            tab[i+3][j+1]=Color::FINISH;
-                            tab[i+2][j+2]=Color::FINISH;
-                            tab[i+1][j+3]=Color::FINISH;
-                            tab[i][j+4]=Color::FINISH;
-                        return true;
-                    }
-                    break;
-            }*/
         }
     return false;
 }
@@ -123,3 +107,4 @@ bool Board::verif(int x,int j,int dx, int dy){
     std::cout << "gagne"<<std::endl;
     return true;
 }
+

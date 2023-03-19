@@ -11,6 +11,7 @@
 class QSlider;
 class QLabel;
 class Param : public QWidget{
+
 Q_OBJECT
 public:
     Param(const char *texte, int min, int max,int defaut);

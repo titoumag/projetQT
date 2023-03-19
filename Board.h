@@ -7,6 +7,7 @@
 
 
 #include <QWidget>
+#include <QFrame>
 
 enum class Color{
     RED,
@@ -18,6 +19,7 @@ enum class Color{
 };
 
 class Board : public QFrame{
+Q_OBJECT
 public:
     Board() = default;
     void paintEvent(QPaintEvent *event) override;
@@ -26,20 +28,27 @@ public:
 public slots:
     void addPiece(int col);
 
+signals:
+    void win(Color joueur);
+
 private:
-    int nb_joueur;
-    int puissance;
-    int width;
+    int nb_joueur{};
+    int puissance{};
+    int width{};
+    bool gagne();
+
+    int colTemp;
+    int ligneTemp;
+    void addPieceTimer();
 
     int heigth=8;
     std::vector<std::vector<Color>> tab;
     Color joueur=Color::RED;
-    bool gagne();
+    bool canPlay;
 
     bool verif(int x, int j, int dx, int dy);
-
-protected:
     void mousePressEvent(QMouseEvent *event) override;
+
 };
 
 

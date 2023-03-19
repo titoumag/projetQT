@@ -17,8 +17,9 @@ Windows::Windows() {
 //    widgetCentral->resize(550, 450);
     auto* layout = new QGridLayout(this);
 
-     auto* label = new QLabel("Puissance 4");
+    label = new QLabel("Puissance 4");
     label->setAlignment(Qt::AlignCenter);
+    label->setStyleSheet("QLabel { font: 18pt; }");
     layout->addWidget(label, 0, 0, 1, 2);
 
 
@@ -53,10 +54,9 @@ Windows::Windows() {
 
 
     board = new Board();
-//    board->setFixedSize(500, 400);
     layout->addWidget(board, 1, 0, 1, 1);
+    connect(board,SIGNAL(win(Color)),this,SLOT(gagne(Color)));
 
-//    buttonCol = std::vector<QPushButton*>();
     hbox = new QHBoxLayout();
     layout->addLayout(hbox, 3, 0, 1, 1);
 
@@ -84,5 +84,9 @@ void Windows::newGame() {
 
 int Windows::getVal(int i) const {
     return listeParam[i]->getVal();
+}
+
+void Windows::gagne(Color joueur) {
+    label->setText("Le joueur " + QString::number((int)joueur+1) + " a gagné !");
 }
 

@@ -23,11 +23,13 @@ enum dim{
 
 class QPushButton;
 class Windows : public QWidget{
+    Q_OBJECT
 public :
     Windows();
 
 public slots:
     void newGame();
+    void gagne(Color joueur);
 
 private:
     Board *board;
@@ -38,6 +40,7 @@ private:
     Param** listeParam;
 
     int getVal(int i) const;
+    QLabel *label;
 };
 
 
