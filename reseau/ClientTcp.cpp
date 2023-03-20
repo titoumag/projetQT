@@ -41,7 +41,7 @@ void ClientTcp::connexion_OK()
 {
     std::cout<<"Connexion OK"<<std::endl;
     QObject::connect(soc, SIGNAL(readyRead()),this, SLOT(recoitCoup()));
-//    emit vers_IHM_connexion_OK(); // on envoie un signal à l'IHM
+    emit vers_IHM_connexion(); // on envoie un signal à l'IHM
 }
 
 void ClientTcp::recoitCoup() {

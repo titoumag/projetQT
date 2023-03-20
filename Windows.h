@@ -23,6 +23,7 @@ enum dim{
 };
 #define NB_PARAM 6
 
+class Reseau;
 class QPushButton;
 class Windows : public QWidget{
     Q_OBJECT
@@ -32,7 +33,7 @@ public :
 public slots:
     void newGame();
     void gagne(Color joueur);
-    void addPieceOk();
+    void addPieceOk(int col);
     void addPieceReseau(int i);
     void nouvellePartieReseau();
 
@@ -43,11 +44,17 @@ private:
     QHBoxLayout* hbox;
     QLCDNumber *lcdTimer;
     Param** listeParam;
+    Reseau *reseau;
     int tempsTimer;
-
 
     int getVal(int i) const;
     QLabel *label;
+
+public:
+    QLabel *labelMessage;
+    bool coupAutorise();
+
+    void addWidgetDroite(QVBoxLayout *layout);
 };
 
 

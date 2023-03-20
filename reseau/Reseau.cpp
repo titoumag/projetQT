@@ -3,14 +3,16 @@
 //
 
 #include <QLineEdit>
+#include <QNetworkInterface>
 #include "Reseau.h"
+#include "QLabel"
 #include "QPushButton"
 
 Reseau::Reseau(Windows *windows) : windows(windows) {
     isServeur = false;
     isConnected = false;
-    port = 0;
     IP = "";
+    newGame = true;
 
     auto *layout = new QGridLayout(this);
     setLayout(layout);
@@ -30,6 +32,7 @@ Reseau::Reseau(Windows *windows) : windows(windows) {
 }
 
 void Reseau::setServeur() {
+    windows->labelMessage->setText("Serveur initialisé (addr ip: "+QNetworkInterface::allAddresses()[1].toString()+" )");
     isServeur = true;
     isConnected=true;
     serveur = new ServeurTcp(this);
@@ -38,6 +41,7 @@ void Reseau::setServeur() {
 }
 
 void Reseau::setClient() {
+    windows->labelMessage->setText("Client connecté à l'adresse ip: "+IP);
     isServeur = false;
     isConnected=true;
     client = new ClientTcp(IP);
@@ -46,6 +50,7 @@ void Reseau::setClient() {
 }
 
 void Reseau::envoieCoup(int i) {
+    newGame = true;
     if (isConnected) {
         if (isServeur) {
             serveur->envoyerCoup(i);
@@ -57,6 +62,18 @@ void Reseau::envoieCoup(int i) {
 
 void Reseau::setIP(QString IP2) {
     IP = IP2;
+}
+
+void Reseau::envoieNouvellePartie() {
+    if (!newGame) return;
+    newGame = false;
+    if (isConnected) {
+        if (isServeur) {
+            serveur->envoyerCoup(-1);
+        } else {
+            client->envoyerCoup(-1);
+        }
+    }
 }
 
 

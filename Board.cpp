@@ -11,6 +11,11 @@
 #include <QEventLoop>
 #include <QTimer>
 #include "Board.h"
+#include "Windows.h"
+
+Board::Board(Windows* windows){
+    this->windows=windows;
+}
 
 void Board::newGame(int nb_joueur, int puissance, int width, int heigth, int vitesse) {
     this->nb_joueur=nb_joueur;
@@ -52,7 +57,8 @@ void Board::paintEvent(QPaintEvent *event) {
 }
 
 void Board::mousePressEvent(QMouseEvent *event) {
-    addPiece(event->pos().x()/50);
+    if (windows->coupAutorise())
+        addPiece(event->pos().x()/50);
 }
 
 void Board::addPiece(int col) {
@@ -110,5 +116,9 @@ bool Board::verif(int x,int j,int dx, int dy){
     }
     std::cout << "gagne"<<std::endl;
     return true;
+}
+
+int Board::joueurActuel() {
+    return (int) joueur;
 }
 

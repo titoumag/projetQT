@@ -17,10 +17,9 @@ private:
     ClientTcp *client;
     ServeurTcp *serveur;
     Windows *windows;
-    bool isServeur;
-    bool isConnected;
-    int port;
     QString IP;
+    bool newGame;
+
 public slots:
     void setIP(QString IP2);
     void setServeur();
@@ -29,8 +28,11 @@ public slots:
 
 public:
     Reseau(Windows *windows);
+    bool isServeur;
+    bool isConnected;
 
 
+    void envoieNouvellePartie();
 };
 
 

@@ -18,12 +18,14 @@ enum class Color{
     FINISH
 };
 
+class Windows;
 class Board : public QFrame{
 Q_OBJECT
 public:
-    Board() = default;
+    Board(Windows *windows);
     void paintEvent(QPaintEvent *event) override;
     void newGame(int nb_joueur, int puissance, int width, int heigth, int vitesse);
+    int joueurActuel();
 
 public slots:
     void addPiece(int col);
@@ -47,6 +49,7 @@ private:
     std::vector<std::vector<Color>> tab;
     Color joueur=Color::RED;
     bool canPlay;
+    Windows *windows;
 
     bool verif(int x, int j, int dx, int dy);
     void mousePressEvent(QMouseEvent *event) override;

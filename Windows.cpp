@@ -24,18 +24,38 @@ Windows::Windows() {
     label->setStyleSheet("QLabel { font: 18pt; }");
     layout->addWidget(label, 0, 0, 1, 1);
 
+    labelMessage = new QLabel("--");
+    labelMessage->setAlignment(Qt::AlignCenter);
+    layout->addWidget(labelMessage, 1, 0, 1, 1);
+
     lcdTimer = new QLCDNumber();
     lcdTimer->setSegmentStyle(QLCDNumber::Flat);
     lcdTimer->setDigitCount(5);
     lcdTimer->display(tempsTimer);
     layout->addWidget(lcdTimer, 0, 1, 1, 1);
 
-    //menu droite
+
     auto *vbox = new QVBoxLayout();
-    layout->addLayout(vbox, 1, 1, 3, 1);
+    layout->addLayout(vbox, 1, 1, 4, 1);
+    addWidgetDroite(vbox);
+
+
+    board = new Board(this);
+    layout->addWidget(board, 2, 0, 1, 1);
+    connect(board,SIGNAL(win(Color)),this,SLOT(gagne(Color)));
+    connect(board,SIGNAL(addPieceOk(int)),this,SLOT(addPieceOk(int)));
+
+    hbox = new QHBoxLayout();
+    layout->addLayout(hbox, 3, 0, 1, 1);
+
+    setWindowTitle("Puissance 4");
+    newGame();
+}
+
+void Windows::addWidgetDroite(QVBoxLayout* vbox){
     listeParam = new Param*[NB_PARAM]{
             new Param("Nb de joueur :", 2,4,2),
-            new Param("Nb de pion a aligner :", 3,6,4),
+            new Param("Nb de pion a aligner :", 1,6,4),
             new Param("Nb de colonne :", 5, 15,10),
             new Param("Nb de ligne :", 5, 12,8),
             new Param("Vitesse descente pion :",40,200,80),
@@ -62,23 +82,12 @@ Windows::Windows() {
     vbox->addWidget(resertParam);
     vbox->addStretch();
 
-    auto* reseau = new Reseau(this);
+    reseau = new Reseau(this);
     vbox->addWidget(reseau);
-    //fin menu droite
-
-    board = new Board();
-    layout->addWidget(board, 1, 0, 1, 1);
-    connect(board,SIGNAL(win(Color)),this,SLOT(gagne(Color)));
-    connect(board,SIGNAL(addPieceOk(int)),reseau,SLOT(envoieCoup(int)));
-
-    hbox = new QHBoxLayout();
-    layout->addLayout(hbox, 3, 0, 1, 1);
-
-    setWindowTitle("Puissance 4");
-    newGame();
 }
 
 void Windows::newGame() {
+    reseau->envoieNouvellePartie();
     int width = getVal(WIDTH);
     board->newGame(getVal(NB_JOUEUR), getVal(PUISSANCE), width, getVal(HEIGTH), getVal(VITESSE));
 
@@ -92,7 +101,7 @@ void Windows::newGame() {
         button->setFixedHeight(40);
         button->setFixedWidth(41);
         hbox->addWidget(button);
-        connect(button, &QPushButton::pressed, this, [=](){board->addPiece(i);});
+        connect(button, &QPushButton::pressed, this, [=](){if (coupAutorise()) board->addPiece(i);});
     }
 }
 
@@ -104,9 +113,10 @@ void Windows::gagne(Color joueur) {
     label->setText("Le joueur " + QString::number((int)joueur+1) + " a gagné !");
 }
 
-void Windows::addPieceOk() {
+void Windows::addPieceOk(int col) {
     std::cout << "addPieceOk" << std::endl;
-
+    reseau->envoieCoup(col);
+    // ...
 }
 
 void Windows::nouvellePartieReseau() {
@@ -117,6 +127,12 @@ void Windows::nouvellePartieReseau() {
 }
 
 void Windows::addPieceReseau(int i) {
-    board->addPiece(i);
+    if (i==-1)
+        newGame();
+    else
+        board->addPiece(i);
 }
 
+bool Windows::coupAutorise() {
+    return !reseau->isConnected || (board->joueurActuel()==0  && reseau->isServeur) || (board->joueurActuel()==1  && !reseau->isServeur);
+}

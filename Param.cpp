@@ -10,6 +10,7 @@
 Param::Param(const char *texte, int min, int max,int defaut) {
     auto *layout = new QGridLayout(this);
     setLayout(layout);
+    setContentsMargins(0,0,0,0);
     this->val = defaut;
     this->defaultVal = defaut;
 
