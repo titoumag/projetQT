@@ -16,12 +16,18 @@ Windows::Windows() {
 //    widgetCentral->setLayout(layout);
 //    widgetCentral->resize(550, 450);
     auto* layout = new QGridLayout(this);
+    tempsTimer=0;
 
     label = new QLabel("Puissance 4");
     label->setAlignment(Qt::AlignCenter);
     label->setStyleSheet("QLabel { font: 18pt; }");
-    layout->addWidget(label, 0, 0, 1, 2);
+    layout->addWidget(label, 0, 0, 1, 1);
 
+    lcdTimer = new QLCDNumber();
+    lcdTimer->setSegmentStyle(QLCDNumber::Flat);
+    lcdTimer->setDigitCount(5);
+    lcdTimer->display(tempsTimer);
+    layout->addWidget(lcdTimer, 0, 1, 1, 1);
 
     auto *vbox = new QVBoxLayout();
     layout->addLayout(vbox, 1, 1, 2, 1);
@@ -29,9 +35,11 @@ Windows::Windows() {
             new Param("Nb de joueur :", 2,4,2),
             new Param("Nb de pion a aligner :", 3,6,4),
             new Param("Nb de colonne :", 5, 15,10),
-            new Param("Nb de ligne :", 5, 12,8)
+            new Param("Nb de ligne :", 5, 12,8),
+            new Param("Vitesse descente pion :",40,200,80),
+            new Param("Timer (=temps par coups) :",5,100,20)
     };
-    vbox->addWidget(new QLabel("Paramètres :"));
+//    vbox->addWidget(new QLabel("Paramètres :"));
     for (int i = 0; i < NB_PARAM; ++i) {
         listeParam[i]->setFixedWidth(200);
         vbox->addWidget(listeParam[i]);
@@ -56,6 +64,7 @@ Windows::Windows() {
     board = new Board();
     layout->addWidget(board, 1, 0, 1, 1);
     connect(board,SIGNAL(win(Color)),this,SLOT(gagne(Color)));
+    connect(board,SIGNAL(addPieceOk()),this,SLOT(addPieceOk()));
 
     hbox = new QHBoxLayout();
     layout->addLayout(hbox, 3, 0, 1, 1);
@@ -66,7 +75,7 @@ Windows::Windows() {
 
 void Windows::newGame() {
     int width = getVal(WIDTH);
-    board->newGame(getVal(NB_JOUEUR),getVal(PUISSANCE),width,getVal(HEIGTH));
+    board->newGame(getVal(NB_JOUEUR), getVal(PUISSANCE), width, getVal(HEIGTH), getVal(VITESSE));
 
     while (hbox->count() > 0) {
         auto* item = hbox->takeAt(0);
@@ -88,5 +97,9 @@ int Windows::getVal(int i) const {
 
 void Windows::gagne(Color joueur) {
     label->setText("Le joueur " + QString::number((int)joueur+1) + " a gagné !");
+}
+
+void Windows::addPieceOk() {
+    std::cout << "addPieceOk" << std::endl;
 }
 

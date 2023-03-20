@@ -17,9 +17,11 @@ enum dim{
     NB_JOUEUR,
     PUISSANCE,
     WIDTH,
-    HEIGTH
+    HEIGTH,
+    VITESSE,
+    TEMPS
 };
-#define NB_PARAM 4
+#define NB_PARAM 6
 
 class QPushButton;
 class Windows : public QWidget{
@@ -30,14 +32,17 @@ public :
 public slots:
     void newGame();
     void gagne(Color joueur);
+    void addPieceOk();
 
 private:
     Board *board;
     QPushButton *newGameButton;
-    QPushButton *quit;
-//    std::vector<QPushButton*> buttonCol;
+//    QPushButton *quit;
     QHBoxLayout* hbox;
+    QLCDNumber *lcdTimer;
     Param** listeParam;
+    int tempsTimer;
+
 
     int getVal(int i) const;
     QLabel *label;

@@ -12,11 +12,12 @@
 #include <QTimer>
 #include "Board.h"
 
-void Board::newGame(int nb_joueur, int puissance, int width, int heigth) {
+void Board::newGame(int nb_joueur, int puissance, int width, int heigth, int vitesse) {
     this->nb_joueur=nb_joueur;
     this->puissance=puissance;
     this->width=width;
     this->heigth=heigth;
+    this->vitesse=vitesse;
     canPlay=false;
     setFixedSize(width*50, heigth*50);
     tab = std::vector<std::vector<Color>>(width,std::vector(heigth,Color::NONE));
@@ -36,6 +37,7 @@ void Board::paintEvent(QPaintEvent *event) {
 
     QPainter painter(this);
     painter.setBrush(Qt::darkBlue);
+    painter.setPen(Qt::darkBlue);
     painter.drawRect(0, 0, rect.width(), rect.height());
 
     const Qt::GlobalColor colors[6] = {Qt::red, Qt::yellow, Qt::green,Qt::magenta, Qt::white,Qt::black};
@@ -55,6 +57,7 @@ void Board::mousePressEvent(QMouseEvent *event) {
 
 void Board::addPiece(int col) {
     if (canPlay) return;
+    if (tab[col][0]==Color::NONE) { emit addPieceOk();}
     canPlay=true;
     colTemp=col;
     ligneTemp=-1;
@@ -68,7 +71,7 @@ void Board::addPieceTimer(){
         tab[colTemp][ligneTemp+1]=joueur;
         ligneTemp++;
         update();
-        QTimer::singleShot(100, this, &Board::addPieceTimer);
+        QTimer::singleShot(vitesse, this, &Board::addPieceTimer);
     }else{
         int y=ligneTemp;
         if (tab[colTemp][y]==Color::NONE){

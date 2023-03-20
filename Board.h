@@ -23,19 +23,21 @@ Q_OBJECT
 public:
     Board() = default;
     void paintEvent(QPaintEvent *event) override;
-    void newGame(int nb_joueur, int puissance, int width, int heigth);
+    void newGame(int nb_joueur, int puissance, int width, int heigth, int vitesse);
 
 public slots:
     void addPiece(int col);
 
 signals:
     void win(Color joueur);
+    void addPieceOk();
 
 private:
     int nb_joueur{};
     int puissance{};
     int width{};
     bool gagne();
+    int vitesse;
 
     int colTemp;
     int ligneTemp;
