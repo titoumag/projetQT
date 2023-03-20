@@ -6,12 +6,18 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_PREFIX_PATH "C:/Qt/6.4.2/mingw_64/lib/cmake")
-find_package(Qt6 COMPONENTS
+#set(CMAKE_PREFIX_PATH "C:/Qt/6.4.2/mingw_64/lib/cmake")
+#find_package(Qt6 COMPONENTS
+#        Core
+#        Gui
+#        Widgets
+#        network
+#        REQUIRED)
+find_package(Qt5 COMPONENTS
         Core
         Gui
         Widgets
-        network
+        Network
         REQUIRED)
 
 add_executable(projet main.cpp Windows.h Windows.cpp Board.h Board.cpp Param.h Param.h Param.cpp reseau/ServeurTcp.cpp reseau/ServeurTcp.h reseau/ClientTcp.h reseau/ClientTcp.cpp reseau/Reseau.h reseau/Reseau.h reseau/Reseau.cpp)
