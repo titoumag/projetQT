@@ -33,6 +33,8 @@ public slots:
     void newGame();
     void gagne(Color joueur);
     void addPieceOk();
+    void addPieceReseau(int i);
+    void nouvellePartieReseau();
 
 private:
     Board *board;

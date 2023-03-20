@@ -8,6 +8,7 @@
 #include <iostream>
 #include "Windows.h"
 #include "Param.h"
+#include "reseau/Reseau.h"
 
 Windows::Windows() {
 //    auto* widgetCentral = new QWidget();
@@ -29,8 +30,9 @@ Windows::Windows() {
     lcdTimer->display(tempsTimer);
     layout->addWidget(lcdTimer, 0, 1, 1, 1);
 
+    //menu droite
     auto *vbox = new QVBoxLayout();
-    layout->addLayout(vbox, 1, 1, 2, 1);
+    layout->addLayout(vbox, 1, 1, 3, 1);
     listeParam = new Param*[NB_PARAM]{
             new Param("Nb de joueur :", 2,4,2),
             new Param("Nb de pion a aligner :", 3,6,4),
@@ -60,11 +62,14 @@ Windows::Windows() {
     vbox->addWidget(resertParam);
     vbox->addStretch();
 
+    auto* reseau = new Reseau(this);
+    vbox->addWidget(reseau);
+    //fin menu droite
 
     board = new Board();
     layout->addWidget(board, 1, 0, 1, 1);
     connect(board,SIGNAL(win(Color)),this,SLOT(gagne(Color)));
-    connect(board,SIGNAL(addPieceOk()),this,SLOT(addPieceOk()));
+    connect(board,SIGNAL(addPieceOk(int)),reseau,SLOT(envoieCoup(int)));
 
     hbox = new QHBoxLayout();
     layout->addLayout(hbox, 3, 0, 1, 1);
@@ -101,5 +106,17 @@ void Windows::gagne(Color joueur) {
 
 void Windows::addPieceOk() {
     std::cout << "addPieceOk" << std::endl;
+
+}
+
+void Windows::nouvellePartieReseau() {
+    for (int i = 0; i < NB_PARAM; ++i) {
+        listeParam[i]->defautParam();
+    }
+    newGame();
+}
+
+void Windows::addPieceReseau(int i) {
+    board->addPiece(i);
 }
 

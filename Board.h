@@ -30,7 +30,7 @@ public slots:
 
 signals:
     void win(Color joueur);
-    void addPieceOk();
+    void addPieceOk(int);
 
 private:
     int nb_joueur{};

@@ -57,7 +57,8 @@ void Board::mousePressEvent(QMouseEvent *event) {
 
 void Board::addPiece(int col) {
     if (canPlay) return;
-    if (tab[col][0]==Color::NONE) { emit addPieceOk();}
+    if (tab[col][0]==Color::NONE) { emit addPieceOk(col);}
+    else return;
     canPlay=true;
     colTemp=col;
     ligneTemp=-1;

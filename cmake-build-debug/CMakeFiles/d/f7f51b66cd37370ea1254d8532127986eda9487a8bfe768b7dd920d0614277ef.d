@@ -250,6 +250,7 @@ projet_autogen/timestamp: \
   C:/Program\ Files/JetBrains/CLion\ 2022.3.1/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/Program\ Files/JetBrains/CLion\ 2022.3.1/bin/mingw/x86_64-w64-mingw32/include/wchar.h \
   C:/Program\ Files/JetBrains/CLion\ 2022.3.1/bin/mingw/x86_64-w64-mingw32/include/wctype.h \
+  C:/Qt/6.4.2/mingw_64/include/QtCore/QObject \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qalgorithms.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qanystringview.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qarraydata.h \
@@ -281,6 +282,7 @@ projet_autogen/timestamp: \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qglobalstatic.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qhash.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qhashfunctions.h \
+  C:/Qt/6.4.2/mingw_64/include/QtCore/qiodevice.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qiodevicebase.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qiterable.h \
   C:/Qt/6.4.2/mingw_64/include/QtCore/qiterator.h \
@@ -358,6 +360,15 @@ projet_autogen/timestamp: \
   C:/Qt/6.4.2/mingw_64/include/QtGui/qtransform.h \
   C:/Qt/6.4.2/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.4.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+  C:/Qt/6.4.2/mingw_64/include/QtNetwork/QTcpServer \
+  C:/Qt/6.4.2/mingw_64/include/QtNetwork/QTcpSocket \
+  C:/Qt/6.4.2/mingw_64/include/QtNetwork/qabstractsocket.h \
+  C:/Qt/6.4.2/mingw_64/include/QtNetwork/qhostaddress.h \
+  C:/Qt/6.4.2/mingw_64/include/QtNetwork/qtcpserver.h \
+  C:/Qt/6.4.2/mingw_64/include/QtNetwork/qtcpsocket.h \
+  C:/Qt/6.4.2/mingw_64/include/QtNetwork/qtnetwork-config.h \
+  C:/Qt/6.4.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
+  C:/Qt/6.4.2/mingw_64/include/QtNetwork/qtnetworkglobal.h \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QFrame \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QHBoxLayout \
   C:/Qt/6.4.2/mingw_64/include/QtWidgets/QLCDNumber \
@@ -484,6 +495,27 @@ projet_autogen/timestamp: \
   C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6GuiTools/Qt6GuiToolsTargets-relwithdebinfo.cmake \
   C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6GuiTools/Qt6GuiToolsTargets.cmake \
   C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6GuiTools/Qt6GuiToolsVersionlessTargets.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkAdditionalTargetInfo.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkConfig.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkConfigVersion.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkConfigVersionImpl.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkDependencies.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkPlugins.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkTargets-relwithdebinfo.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkTargets.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkVersionlessTargets.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginAdditionalTargetInfo.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginConfig.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginTargets-relwithdebinfo.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginTargets.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginAdditionalTargetInfo.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginConfig.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginTargets-relwithdebinfo.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginTargets.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginAdditionalTargetInfo.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginConfig.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginTargets-relwithdebinfo.cmake \
+  C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginTargets.cmake \
   C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QWindowsVistaStylePluginAdditionalTargetInfo.cmake \
   C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QWindowsVistaStylePluginConfig.cmake \
   C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QWindowsVistaStylePluginTargets-relwithdebinfo.cmake \
@@ -525,4 +557,10 @@ projet_autogen/timestamp: \
   CMakeFiles/3.24.2/CMakeSystem.cmake \
   projet_autogen/moc_predefs.h \
   C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/main.cpp \
+  C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/reseau/ClientTcp.cpp \
+  C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/reseau/ClientTcp.h \
+  C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/reseau/Reseau.cpp \
+  C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/reseau/Reseau.h \
+  C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/reseau/ServeurTcp.cpp \
+  C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/reseau/ServeurTcp.h \
   C:/Program\ Files/JetBrains/CLion\ 2022.3.1/bin/cmake/win/bin/cmake.exe

@@ -2,3 +2,6 @@
 #include "EWIEGA46WW/moc_Board.cpp"
 #include "EWIEGA46WW/moc_Param.cpp"
 #include "EWIEGA46WW/moc_Windows.cpp"
+#include "HXCJDBW7VI/moc_ClientTcp.cpp"
+#include "HXCJDBW7VI/moc_Reseau.cpp"
+#include "HXCJDBW7VI/moc_ServeurTcp.cpp"

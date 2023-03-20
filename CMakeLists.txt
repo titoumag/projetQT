@@ -11,12 +11,14 @@ find_package(Qt6 COMPONENTS
         Core
         Gui
         Widgets
+        network
         REQUIRED)
 
-add_executable(projet main.cpp Windows.h Windows.cpp Board.h Board.cpp Param.h Param.h Param.cpp)
+add_executable(projet main.cpp Windows.h Windows.cpp Board.h Board.cpp Param.h Param.h Param.cpp reseau/ServeurTcp.cpp reseau/ServeurTcp.h reseau/ClientTcp.h reseau/ClientTcp.cpp reseau/Reseau.h reseau/Reseau.h reseau/Reseau.cpp)
 target_link_libraries(projet
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        Qt::Network
         )
 

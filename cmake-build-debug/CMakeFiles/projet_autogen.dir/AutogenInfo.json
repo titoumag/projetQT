@@ -211,7 +211,32 @@
 		"C:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake",
 		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QWindowsVistaStylePluginTargets.cmake",
 		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QWindowsVistaStylePluginTargets-relwithdebinfo.cmake",
-		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QWindowsVistaStylePluginAdditionalTargetInfo.cmake"
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QWindowsVistaStylePluginAdditionalTargetInfo.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkConfigVersion.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkConfigVersionImpl.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkConfig.cmake",
+		"C:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkDependencies.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkTargets.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkTargets-relwithdebinfo.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkAdditionalTargetInfo.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkVersionlessTargets.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6NetworkPlugins.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginConfig.cmake",
+		"C:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginTargets.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginTargets-relwithdebinfo.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QSchannelBackendPluginAdditionalTargetInfo.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginConfig.cmake",
+		"C:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginTargets.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginTargets-relwithdebinfo.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendCertOnlyPluginAdditionalTargetInfo.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginConfig.cmake",
+		"C:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginTargets.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginTargets-relwithdebinfo.cmake",
+		"C:/Qt/6.4.2/mingw_64/lib/cmake/Qt6Network/Qt6QTlsBackendOpenSSLPluginAdditionalTargetInfo.cmake"
 	],
 	"CMAKE_SOURCE_DIR" : "C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet",
 	"DEP_FILE" : "C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/cmake-build-debug/projet_autogen/deps",
@@ -235,6 +260,24 @@
 			"MU",
 			"EWIEGA46WW/moc_Windows.cpp",
 			null
+		],
+		[
+			"C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/reseau/ClientTcp.h",
+			"MU",
+			"HXCJDBW7VI/moc_ClientTcp.cpp",
+			null
+		],
+		[
+			"C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/reseau/Reseau.h",
+			"MU",
+			"HXCJDBW7VI/moc_Reseau.cpp",
+			null
+		],
+		[
+			"C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/reseau/ServeurTcp.h",
+			"MU",
+			"HXCJDBW7VI/moc_ServeurTcp.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -245,6 +288,7 @@
 		"MINGW_HAS_SECURE_API=1",
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
+		"QT_NETWORK_LIB",
 		"QT_WIDGETS_LIB",
 		"UNICODE",
 		"WIN32",
@@ -267,6 +311,7 @@
 		"C:/Qt/6.4.2/mingw_64/mkspecs/win32-g++",
 		"C:/Qt/6.4.2/mingw_64/include/QtGui",
 		"C:/Qt/6.4.2/mingw_64/include/QtWidgets",
+		"C:/Qt/6.4.2/mingw_64/include/QtNetwork",
 		"C:/Program Files/JetBrains/CLion 2022.3.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++",
 		"C:/Program Files/JetBrains/CLion 2022.3.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32",
 		"C:/Program Files/JetBrains/CLion 2022.3.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward",
@@ -323,6 +368,21 @@
 		],
 		[
 			"C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/main.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/reseau/ClientTcp.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/reseau/Reseau.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/reseau/ServeurTcp.cpp",
 			"MU",
 			null
 		]
