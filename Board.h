@@ -21,11 +21,13 @@ enum class Color{
 class Windows;
 class Board : public QFrame{
 Q_OBJECT
+
 public:
     Board(Windows *windows);
     void paintEvent(QPaintEvent *event) override;
     void newGame(int nb_joueur, int puissance, int width, int heigth, int vitesse);
     int joueurActuel();
+    void changeJoueur();
 
 public slots:
     void addPiece(int col);

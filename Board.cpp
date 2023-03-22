@@ -15,6 +15,7 @@
 
 Board::Board(Windows* windows){
     this->windows=windows;
+    nb_joueur=0;
 }
 
 void Board::newGame(int nb_joueur, int puissance, int width, int heigth, int vitesse) {
@@ -57,7 +58,7 @@ void Board::paintEvent(QPaintEvent *event) {
 }
 
 void Board::mousePressEvent(QMouseEvent *event) {
-    if (windows->coupAutorise())
+    if (nb_joueur!=0 && windows->coupAutorise())
         addPiece(event->pos().x()/50);
 }
 
@@ -120,5 +121,10 @@ bool Board::verif(int x,int j,int dx, int dy){
 
 int Board::joueurActuel() {
     return (int) joueur;
+}
+
+void Board::changeJoueur() {
+    joueur = (Color) (((int) joueur + 1) % nb_joueur);
+
 }
 

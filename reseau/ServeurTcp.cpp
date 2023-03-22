@@ -13,13 +13,12 @@ ServeurTcp::ServeurTcp(Reseau* reseau) : reseau(reseau) {
 }
 
 void ServeurTcp::demande_connexion() {
-    emit vers_IHM_connexion(); // on envoie un signal à l'IHM
 //    // on crée une nouvelle socket pour ce client
     clientConnection = nextPendingConnection();
+    emit vers_IHM_connexion(); // on envoie un signal à l'IHM
     // si on reçoit des données, le slot recoitCoup() est appelé
     QObject::connect(clientConnection, SIGNAL(readyRead()),
                      this, SLOT(recoitCoup()));
-    std::cout<<"Connexion"<<std::endl;
 }
 
 void ServeurTcp::recoitCoup() {

@@ -9,6 +9,7 @@
 #include "Windows.h"
 #include "Param.h"
 #include "reseau/Reseau.h"
+#include "QTimer"
 
 Windows::Windows() {
 //    auto* widgetCentral = new QWidget();
@@ -41,6 +42,7 @@ Windows::Windows() {
 
 
     board = new Board(this);
+    board->setFixedSize(500,400);
     layout->addWidget(board, 2, 0, 1, 1);
     connect(board,SIGNAL(win(Color)),this,SLOT(gagne(Color)));
     connect(board,SIGNAL(addPieceOk(int)),this,SLOT(addPieceOk(int)));
@@ -48,8 +50,10 @@ Windows::Windows() {
     hbox = new QHBoxLayout();
     layout->addLayout(hbox, 3, 0, 1, 1);
 
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateTimer()));
     setWindowTitle("Puissance 4");
-    newGame();
+//    newGame();
 }
 
 void Windows::addWidgetDroite(QVBoxLayout* vbox){
@@ -103,6 +107,22 @@ void Windows::newGame() {
         hbox->addWidget(button);
         connect(button, &QPushButton::pressed, this, [=](){if (coupAutorise()) board->addPiece(i);});
     }
+    tempsPartie= getVal(TEMPS)*10;
+    tempsTimer= tempsPartie;
+    lcdTimer->display(tempsTimer);
+    timer->start(100);
+}
+
+void Windows::updateTimer() {
+    tempsTimer--;
+    char t[5];
+    snprintf(t,tempsTimer>=100?5:tempsTimer>=10?4:3,"%f",tempsTimer/10.0);
+    lcdTimer->display(t);
+    if (tempsTimer==0){
+        timer->stop();
+        addPieceOk(-2);
+        board->changeJoueur();
+    }
 }
 
 int Windows::getVal(int i) const {
@@ -110,6 +130,7 @@ int Windows::getVal(int i) const {
 }
 
 void Windows::gagne(Color joueur) {
+    timer->stop();
     if (reseau->isConnected) {
         if (((int) reseau->isServeur + board->joueurActuel()) % 2 == 1) label->setText("Vous avez gagné !");
         else label->setText("Vous avez perdu !");
@@ -119,6 +140,8 @@ void Windows::gagne(Color joueur) {
 
 void Windows::addPieceOk(int col) {
     std::cout << "addPieceOk" << std::endl;
+    tempsTimer= tempsPartie;
+    timer->start();
     reseau->envoieCoup(col);
     if (reseau->isConnected) {
         if (((int) reseau->isServeur + board->joueurActuel()) % 2 == 1) label->setText("A l'adversaire de jouer");
@@ -143,6 +166,6 @@ void Windows::addPieceReseau(int i) {
         board->addPiece(i);
 }
 
-bool Windows::coupAutorise() {
+bool Windows::coupAutorise() const {
     return !reseau->isConnected || (board->joueurActuel()==0  && reseau->isServeur) || (board->joueurActuel()==1  && !reseau->isServeur);
 }

@@ -36,6 +36,7 @@ public slots:
     void addPieceOk(int col);
     void addPieceReseau(int i);
     void nouvellePartieReseau();
+    void updateTimer();
 
 private:
     Board *board;
@@ -46,15 +47,18 @@ private:
     Param** listeParam;
     Reseau *reseau;
     int tempsTimer;
+    int tempsPartie;
 
     int getVal(int i) const;
     QLabel *label;
 
 public:
+    QTimer *timer;
     QLabel *labelMessage;
-    bool coupAutorise();
+    bool coupAutorise() const;
 
     void addWidgetDroite(QVBoxLayout *layout);
+
 };
 
 

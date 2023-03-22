@@ -4,8 +4,10 @@
 
 #include <QLineEdit>
 #include <QNetworkInterface>
+#include <iostream>
 #include "Reseau.h"
 #include "QLabel"
+#include "QTimer"
 #include "QPushButton"
 
 Reseau::Reseau(Windows *windows) : windows(windows) {
@@ -33,6 +35,7 @@ Reseau::Reseau(Windows *windows) : windows(windows) {
 
 void Reseau::setServeur() {
     windows->labelMessage->setText("Serveur initialisé (addr ip: "+QNetworkInterface::allAddresses()[1].toString()+" )");
+    windows->timer->stop();
     isServeur = true;
     isConnected=true;
     boutonServeur->setEnabled(false);
@@ -57,7 +60,7 @@ void Reseau::setClient() {
 
 void Reseau::envoieCoup(int i) {
     newGame = true;
-    if (isConnected) {
+    if (isConnected && i!=-2) {
         if (isServeur) {
             serveur->envoyerCoup(i);
         } else {
@@ -71,11 +74,14 @@ void Reseau::setIP(QString IP2) {
 }
 
 void Reseau::envoieNouvellePartie() {
+    std::cout<<"envoieNouvellePartie"<<std::endl;
     if (!newGame) return;
     newGame = false;
     if (isConnected) {
         if (isServeur) {
+    std::cout<<"envoieNouvellePartie"<<std::endl;
             serveur->envoyerCoup(-1);
+    std::cout<<"envoieNouvellePartie"<<std::endl;
         } else {
             client->envoyerCoup(-1);
         }
