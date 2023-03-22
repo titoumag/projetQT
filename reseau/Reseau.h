@@ -18,6 +18,8 @@ private:
     ServeurTcp *serveur;
     Windows *windows;
     QString IP;
+    QPushButton *boutonServeur;
+    QPushButton *boutonClient;
     bool newGame;
 
 public slots:
@@ -30,7 +32,6 @@ public:
     Reseau(Windows *windows);
     bool isServeur;
     bool isConnected;
-
 
     void envoieNouvellePartie();
 };

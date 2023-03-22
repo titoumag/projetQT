@@ -110,13 +110,21 @@ int Windows::getVal(int i) const {
 }
 
 void Windows::gagne(Color joueur) {
-    label->setText("Le joueur " + QString::number((int)joueur+1) + " a gagné !");
+    if (reseau->isConnected) {
+        if (((int) reseau->isServeur + board->joueurActuel()) % 2 == 1) label->setText("Vous avez gagné !");
+        else label->setText("Vous avez perdu !");
+    }else
+        label->setText("Le joueur " + QString::number((int)joueur+1) + " a gagné !");
 }
 
 void Windows::addPieceOk(int col) {
     std::cout << "addPieceOk" << std::endl;
     reseau->envoieCoup(col);
-    // ...
+    if (reseau->isConnected) {
+        if (((int) reseau->isServeur + board->joueurActuel()) % 2 == 1) label->setText("A l'adversaire de jouer");
+        else label->setText("A vous de jouer");
+    }else
+        label->setText("Au tour du joueur " + QString::number((int)board->joueurActuel()+1));
 }
 
 void Windows::nouvellePartieReseau() {
@@ -124,6 +132,8 @@ void Windows::nouvellePartieReseau() {
         listeParam[i]->defautParam();
     }
     newGame();
+    if (reseau->isServeur) label->setText("Connecté au client - A vous de jouer");
+    else label->setText("Connecté au serveur - Au tour de l'adversaire");
 }
 
 void Windows::addPieceReseau(int i) {
