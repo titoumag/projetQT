@@ -1,5 +1,4 @@
-C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/cmake-build-debug/CMakeFiles/projet.dir
-C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/cmake-build-debug/CMakeFiles/projet_autogen_timestamp_deps.dir
-C:/Users/titou/Documents/ecole-universite/__S4__/cpp/projet/cmake-build-debug/CMakeFiles/projet_autogen.dir
+/home/tmagnin4/CLionProjects/projetQT/cmake-build-debug/CMakeFiles/projet.dir
+/home/tmagnin4/CLionProjects/projetQT/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/tmagnin4/CLionProjects/projetQT/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/tmagnin4/CLionProjects/projetQT/cmake-build-debug/CMakeFiles/projet_autogen.dir

@@ -3,6 +3,7 @@
 #include <QSlider>
 #include <QTimer>
 #include <QLabel>
+#include <unistd.h>
 #include "Param.h"
 #include "Windows.h"
 
@@ -22,7 +23,8 @@ Windows::Windows() {
     lcdTimer = new QLCDNumber();
     lcdTimer->setSegmentStyle(QLCDNumber::Flat);
     lcdTimer->setDigitCount(5);
-    lcdTimer->display(tempsTimer);
+    lcdTimer->display("--:--");
+    lcdTimer->setFixedWidth(100);
     layout->addWidget(lcdTimer, 0, 1, 1, 1);
 
 
@@ -98,21 +100,28 @@ void Windows::newGame() {
         hbox->addWidget(button);
         connect(button, &QPushButton::pressed, this, [=](){if (coupAutorise()) board->addPiece(i);});
     }
-    tempsPartie= getVal(TEMPS)*10;
+    tempsPartie= getVal(TEMPS)*100;
     tempsTimer= tempsPartie;
     lcdTimer->display(tempsTimer);
-    timer->start(100);
+    timer->start(10);
 }
 
 void Windows::updateTimer() {
     tempsTimer--;
     char t[5];
-    snprintf(t,tempsTimer>=100?5:tempsTimer>=10?4:3,"%f",tempsTimer/10.0);
+    sprintf(t,"%d:%d%d",tempsTimer/100,tempsTimer/10%10,tempsTimer%10);
     lcdTimer->display(t);
-    if (tempsTimer==0){
+    if (tempsTimer<500){
+        if (tempsTimer/50%2==1)
+            lcdTimer->setStyleSheet("color: red; border-color:red; border-style: solid;border-width: 2px;");
+        else
+            lcdTimer->setStyleSheet("color: none;border-color:white;");
+    }
+    if (tempsTimer==-1){
         timer->stop();
         addPieceOk(-2);
         board->changeJoueur();
+        sleep(1);
     }
 }
 
@@ -132,6 +141,7 @@ void Windows::gagne(Color joueur) {
 void Windows::addPieceOk(int col) {
     tempsTimer= tempsPartie;
     timer->start();
+    lcdTimer->setStyleSheet("color: none;border-color:white");
     reseau->envoieCoup(col);
     if (reseau->isConnected) {
         if (((int) reseau->isServeur + board->joueurActuel()) % 2 == 1) label->setText("A l'adversaire de jouer");
