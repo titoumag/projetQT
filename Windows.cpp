@@ -4,12 +4,14 @@
 #include <QTimer>
 #include <QLabel>
 #include <unistd.h>
+#include <QCheckBox>
 #include "Param.h"
 #include "Windows.h"
 
 Windows::Windows() {
     auto* layout = new QGridLayout(this);
     tempsTimer=0;
+    timerActif=false;
 
     label = new QLabel("Puissance 4");
     label->setAlignment(Qt::AlignCenter);
@@ -62,6 +64,10 @@ void Windows::addWidgetDroite(QVBoxLayout* vbox){
         vbox->addWidget(listeParam[i]);
     }
 
+    auto* timerBool = new QCheckBox("Activer le timer");
+    vbox->addWidget(timerBool);
+    connect(timerBool,SIGNAL(stateChanged(int)),this,SLOT(changeModeTimer(int)));
+
     newGameButton = new QPushButton("Nouvelle partie");
     newGameButton->setFixedWidth(200);
     connect(newGameButton, &QPushButton::pressed, this, &Windows::newGame);
@@ -79,6 +85,10 @@ void Windows::addWidgetDroite(QVBoxLayout* vbox){
 
     reseau = new Reseau(this);
     vbox->addWidget(reseau);
+}
+
+void Windows::changeModeTimer(int mode){
+    timerActif= mode==2;
 }
 
 void Windows::newGame() {
@@ -100,10 +110,15 @@ void Windows::newGame() {
         hbox->addWidget(button);
         connect(button, &QPushButton::pressed, this, [=](){if (coupAutorise()) board->addPiece(i);});
     }
-    tempsPartie= getVal(TEMPS)*100;
-    tempsTimer= tempsPartie;
-    lcdTimer->display(tempsTimer);
-    timer->start(10);
+
+    tempsTimer= tempsPartie = getVal(TEMPS)*100;
+    if (timerActif){
+        lcdTimer->display(tempsTimer);
+        timer->start(10);
+    }else {
+        lcdTimer->display("--:--");
+        timer->stop();
+    }
 }
 
 void Windows::updateTimer() {
@@ -139,8 +154,10 @@ void Windows::gagne(Color joueur) {
 }
 
 void Windows::addPieceOk(int col) {
+    if (timerActif){
     tempsTimer= tempsPartie;
     timer->start();
+    }
     lcdTimer->setStyleSheet("color: none;border-color:white");
     reseau->envoieCoup(col);
     if (reseau->isConnected) {

@@ -37,6 +37,7 @@ public slots:
     void addPieceReseau(int i);
     void nouvellePartieReseau();
     void updateTimer();
+    void changeModeTimer(int mode);
 
 private:
     Board *board;
@@ -48,7 +49,9 @@ private:
     int tempsTimer;
     int tempsPartie;
     QLabel *label;
+    bool timerActif;
     int getVal(int i) const;
+
 };
 
 
