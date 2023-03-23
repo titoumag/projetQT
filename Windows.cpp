@@ -1,22 +1,12 @@
-//
-// Created by titou on 11/03/2023.
-//
-
-#include <QPushButton>
-#include <QGridLayout>
-#include <QLabel>
-#include <iostream>
-#include "Windows.h"
-#include "Param.h"
 #include "reseau/Reseau.h"
-#include "QTimer"
+#include <iostream>
+#include <QSlider>
+#include <QTimer>
+#include <QLabel>
+#include "Param.h"
+#include "Windows.h"
 
 Windows::Windows() {
-//    auto* widgetCentral = new QWidget();
-//    setCentralWidget(widgetCentral);
-//    auto* layout = new QGridLayout(widgetCentral);
-//    widgetCentral->setLayout(layout);
-//    widgetCentral->resize(550, 450);
     auto* layout = new QGridLayout(this);
     tempsTimer=0;
 
@@ -65,7 +55,6 @@ void Windows::addWidgetDroite(QVBoxLayout* vbox){
             new Param("Vitesse descente pion :",40,200,80),
             new Param("Timer (=temps par coups) :",5,100,20)
     };
-//    vbox->addWidget(new QLabel("Paramètres :"));
     for (int i = 0; i < NB_PARAM; ++i) {
         listeParam[i]->setFixedWidth(200);
         vbox->addWidget(listeParam[i]);
@@ -91,6 +80,8 @@ void Windows::addWidgetDroite(QVBoxLayout* vbox){
 }
 
 void Windows::newGame() {
+    if (!reseau->isConnected)
+        label->setText("Le joueur 1 commence");
     reseau->envoieNouvellePartie();
     int width = getVal(WIDTH);
     board->newGame(getVal(NB_JOUEUR), getVal(PUISSANCE), width, getVal(HEIGTH), getVal(VITESSE));
@@ -139,7 +130,6 @@ void Windows::gagne(Color joueur) {
 }
 
 void Windows::addPieceOk(int col) {
-    std::cout << "addPieceOk" << std::endl;
     tempsTimer= tempsPartie;
     timer->start();
     reseau->envoieCoup(col);
@@ -147,7 +137,7 @@ void Windows::addPieceOk(int col) {
         if (((int) reseau->isServeur + board->joueurActuel()) % 2 == 1) label->setText("A l'adversaire de jouer");
         else label->setText("A vous de jouer");
     }else
-        label->setText("Au tour du joueur " + QString::number((int)board->joueurActuel()+1));
+        label->setText("Au tour du joueur " + QString::number(((int)board->joueurActuel()+1)%board->getNbJoueur()+1));
 }
 
 void Windows::nouvellePartieReseau() {
@@ -160,10 +150,8 @@ void Windows::nouvellePartieReseau() {
 }
 
 void Windows::addPieceReseau(int i) {
-    if (i==-1)
-        newGame();
-    else
-        board->addPiece(i);
+    if (i==-1) newGame();
+    else board->addPiece(i);
 }
 
 bool Windows::coupAutorise() const {

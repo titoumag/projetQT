@@ -2,13 +2,15 @@
 // Created by titou on 20/03/2023.
 //
 
+#include "Reseau.h"
 #include <QLineEdit>
 #include <QNetworkInterface>
 #include <iostream>
-#include "Reseau.h"
-#include "QLabel"
-#include "QTimer"
-#include "QPushButton"
+#include <QLabel>
+#include <QTimer>
+#include <QGridLayout>
+#include "../Windows.h"
+
 
 Reseau::Reseau(Windows *windows) : windows(windows) {
     isServeur = false;
@@ -42,7 +44,7 @@ void Reseau::setServeur() {
     boutonClient->setEnabled(false);
     boutonServeur->setText("Serveur initialisé");
     boutonClient->setText("--");
-    serveur = new ServeurTcp(this);
+    serveur = new ServeurTcp();
     QObject::connect(serveur, SIGNAL(vers_IHM_connexion()), windows, SLOT(nouvellePartieReseau()));
     QObject::connect(serveur, SIGNAL(coupJoueeReseau(int)), windows, SLOT(addPieceReseau(int)));
 }
@@ -74,14 +76,11 @@ void Reseau::setIP(QString IP2) {
 }
 
 void Reseau::envoieNouvellePartie() {
-    std::cout<<"envoieNouvellePartie"<<std::endl;
     if (!newGame) return;
     newGame = false;
     if (isConnected) {
         if (isServeur) {
-    std::cout<<"envoieNouvellePartie"<<std::endl;
             serveur->envoyerCoup(-1);
-    std::cout<<"envoieNouvellePartie"<<std::endl;
         } else {
             client->envoyerCoup(-1);
         }

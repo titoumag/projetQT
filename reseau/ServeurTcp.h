@@ -13,7 +13,7 @@ class ServeurTcp : public QTcpServer {
 
 
 public :
-    ServeurTcp(Reseau* reseau);
+    ServeurTcp();
     void envoyerCoup(int i);
 
 private slots :
@@ -25,7 +25,6 @@ signals :
     void coupJoueeReseau(int);
 private :
     QTcpSocket *clientConnection;
-    Reseau* reseau;
 
 };
 

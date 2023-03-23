@@ -5,12 +5,13 @@
 #ifndef PROJET_RESEAU_H
 #define PROJET_RESEAU_H
 
-
+#include <QWidget>
+#include <QPushButton>
 #include "ClientTcp.h"
 #include "ServeurTcp.h"
-#include "../Board.h"
-#include "../Windows.h"
 
+class Board;
+class Windows;
 class Reseau : public QWidget {
     Q_OBJECT
 private:

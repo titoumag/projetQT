@@ -12,7 +12,7 @@ ClientTcp::ClientTcp(QString IP2)
 
     // signal émis lors de la connexion au serveur
     // signal émis lorsque des données sont prêtes à être lues
-    std::cout<<"Client en écoute"<<std::endl;
+    std::cout<<"Client en ecoute"<<std::endl;
     std::cout<<"-"<<IP2.toStdString()<<"-"<<std::endl;
     IP=IP2;
     soc->connectToHost(IP,port); // pour se connecter au serveur
@@ -47,7 +47,6 @@ void ClientTcp::connexion_OK()
 void ClientTcp::recoitCoup() {
     int col = atoi(soc->readLine());
     emit coupJoueeReseau(col);
-    std::cout<<col<<std::endl;
 }
 
 void ClientTcp::envoyerCoup(int i) {

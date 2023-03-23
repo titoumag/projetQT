@@ -22,12 +22,14 @@ class Windows;
 class Board : public QFrame{
 Q_OBJECT
 
+
 public:
     Board(Windows *windows);
     void paintEvent(QPaintEvent *event) override;
     void newGame(int nb_joueur, int puissance, int width, int heigth, int vitesse);
     int joueurActuel();
     void changeJoueur();
+    int getNbJoueur();
 
 public slots:
     void addPiece(int col);
@@ -42,17 +44,15 @@ private:
     int width{};
     bool gagne();
     int vitesse;
-
     int colTemp;
     int ligneTemp;
-    void addPieceTimer();
-
     int heigth=8;
     std::vector<std::vector<Color>> tab;
     Color joueur=Color::RED;
     bool canPlay;
     Windows *windows;
 
+    void addPieceTimer();
     bool verif(int x, int j, int dx, int dy);
     void mousePressEvent(QMouseEvent *event) override;
 

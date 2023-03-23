@@ -7,7 +7,6 @@
 void modeSombre(QApplication*);
 
 int main(int argc, char *argv[]) {
-    std::cout<<"test"<<std::endl;
     QApplication a(argc, argv);
     modeSombre(&a);
     Windows window;

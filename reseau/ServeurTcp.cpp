@@ -5,11 +5,11 @@
 #include "ServeurTcp.h"
 
 
-ServeurTcp::ServeurTcp(Reseau* reseau) : reseau(reseau) {
+ServeurTcp::ServeurTcp() {
     listen(QHostAddress::Any, 4000);
     QObject::connect(this, SIGNAL(newConnection()),
                      this, SLOT(demande_connexion()));
-    std::cout<<"Serveur en écoute"<<std::endl;
+    std::cout<<"Serveur en ecoute"<<std::endl;
 }
 
 void ServeurTcp::demande_connexion() {
@@ -24,7 +24,6 @@ void ServeurTcp::demande_connexion() {
 void ServeurTcp::recoitCoup() {
     int col = atoi(clientConnection->readLine());
     emit coupJoueeReseau(col);
-    std::cout<<col<<std::endl;
 }
 
 void ServeurTcp::envoyerCoup(int i) {

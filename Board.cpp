@@ -128,3 +128,7 @@ void Board::changeJoueur() {
 
 }
 
+int Board::getNbJoueur() {
+    return nb_joueur;
+}
+
