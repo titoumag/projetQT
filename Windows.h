@@ -29,6 +29,7 @@ public :
     QLabel *labelMessage;
     bool coupAutorise() const;
     void addWidgetDroite(QVBoxLayout *layout);
+    void keyPressEvent(QKeyEvent *event) override;
 
 public slots:
     void newGame();
@@ -52,6 +53,7 @@ private:
     bool timerActif;
     int getVal(int i) const;
 
+    void setButtonLine(int width);
 };
 
 

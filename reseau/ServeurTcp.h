@@ -15,6 +15,8 @@ class ServeurTcp : public QTcpServer {
 public :
     ServeurTcp();
     void envoyerCoup(int i);
+    bool isConnected;
+
 
 private slots :
     void demande_connexion() ;

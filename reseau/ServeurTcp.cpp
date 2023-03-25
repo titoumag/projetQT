@@ -6,6 +6,7 @@
 
 
 ServeurTcp::ServeurTcp() {
+    isConnected= false;
     listen(QHostAddress::Any, 4000);
     QObject::connect(this, SIGNAL(newConnection()),
                      this, SLOT(demande_connexion()));
@@ -15,6 +16,7 @@ ServeurTcp::ServeurTcp() {
 void ServeurTcp::demande_connexion() {
 //    // on crée une nouvelle socket pour ce client
     clientConnection = nextPendingConnection();
+    isConnected=true;
     emit vers_IHM_connexion(); // on envoie un signal à l'IHM
     // si on reçoit des données, le slot recoitCoup() est appelé
     QObject::connect(clientConnection, SIGNAL(readyRead()),

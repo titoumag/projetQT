@@ -7,6 +7,8 @@
 #include <QCheckBox>
 #include "Param.h"
 #include "Windows.h"
+#include <QKeyEvent>
+#include <fstream>
 
 Windows::Windows() {
     auto* layout = new QGridLayout(this);
@@ -92,12 +94,25 @@ void Windows::changeModeTimer(int mode){
 }
 
 void Windows::newGame() {
+    reseau->envoieNouvellePartie();
     if (!reseau->isConnected)
         label->setText("Le joueur 1 commence");
-    reseau->envoieNouvellePartie();
     int width = getVal(WIDTH);
     board->newGame(getVal(NB_JOUEUR), getVal(PUISSANCE), width, getVal(HEIGTH), getVal(VITESSE));
 
+    setButtonLine(width);
+
+    tempsTimer= tempsPartie = getVal(TEMPS)*100;
+    if (timerActif){
+        lcdTimer->display(tempsTimer);
+        timer->start(10);
+    }else {
+        lcdTimer->display("--:--");
+        timer->stop();
+    }
+}
+
+void Windows::setButtonLine(int width){
     while (hbox->count() > 0) {
         auto* item = hbox->takeAt(0);
         delete item->widget();
@@ -109,15 +124,6 @@ void Windows::newGame() {
         button->setFixedWidth(41);
         hbox->addWidget(button);
         connect(button, &QPushButton::pressed, this, [=](){if (coupAutorise()) board->addPiece(i);});
-    }
-
-    tempsTimer= tempsPartie = getVal(TEMPS)*100;
-    if (timerActif){
-        lcdTimer->display(tempsTimer);
-        timer->start(10);
-    }else {
-        lcdTimer->display("--:--");
-        timer->stop();
     }
 }
 
@@ -183,4 +189,19 @@ void Windows::addPieceReseau(int i) {
 
 bool Windows::coupAutorise() const {
     return !reseau->isConnected || (board->joueurActuel()==0  && reseau->isServeur) || (board->joueurActuel()==1  && !reseau->isServeur);
+}
+
+void Windows::keyPressEvent(QKeyEvent *event) {
+    if (event->key()==Qt::Key_S && hbox->count() > 0){
+        std::ofstream file("save.txt");
+        board->saveGame(file);
+        file.close();
+    }
+    if (event->key()==Qt::Key_L && !reseau->isConnected){
+        std::ifstream file("save.txt");
+        int width = board->loadGame(file);
+        file.close();
+        setButtonLine(width);
+        label->setText("Le joueur "+QString::number(board->joueurActuel()+1)+" commence");
+    }
 }

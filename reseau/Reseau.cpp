@@ -80,7 +80,13 @@ void Reseau::envoieNouvellePartie() {
     newGame = false;
     if (isConnected) {
         if (isServeur) {
-            serveur->envoyerCoup(-1);
+            if (serveur->isConnected)
+                serveur->envoyerCoup(-1);
+            else {
+                windows->labelMessage->setText("Serveur deconnecté, nouvelle partie locale");
+                isConnected = false;
+                delete serveur;
+            }
         } else {
             client->envoyerCoup(-1);
         }

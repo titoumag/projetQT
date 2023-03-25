@@ -30,6 +30,8 @@ public:
     int joueurActuel();
     void changeJoueur();
     int getNbJoueur();
+    void saveGame(std::ofstream &file);
+    int loadGame(std::ifstream &file);
 
 public slots:
     void addPiece(int col);

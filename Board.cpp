@@ -10,6 +10,7 @@
 #include <QCoreApplication>
 #include <QEventLoop>
 #include <QTimer>
+#include <fstream>
 #include "Board.h"
 #include "Windows.h"
 
@@ -130,5 +131,41 @@ void Board::changeJoueur() {
 
 int Board::getNbJoueur() {
     return nb_joueur;
+}
+
+void Board::saveGame(std::ofstream &file){
+    file << nb_joueur << std::endl;
+    file << puissance << std::endl;
+    file << width << std::endl;
+    file << heigth << std::endl;
+    file << vitesse << std::endl;
+    file << (int) joueur << std::endl;
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < heigth; j++) {
+            file << (int) tab[i][j];
+        }
+    }
+    file << std::endl;
+}
+
+int Board::loadGame(std::ifstream &file){
+    file >> nb_joueur;
+    file >> puissance;
+    file >> width;
+    file >> heigth;
+    file >> vitesse;
+    file.ignore();
+    joueur=(Color) (file.get() - '0');
+    file.ignore();
+    tab = std::vector<std::vector<Color>>(width,std::vector(heigth,Color::NONE));
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < heigth; j++) {
+            tab[i][j]=(Color) (file.get() - '0');
+        }
+    }
+    canPlay=false;
+    setFixedSize(width*50, heigth*50);
+    update();
+    return width;
 }
 
