@@ -56,9 +56,9 @@ void Windows::addWidgetDroite(QVBoxLayout* vbox){
     listeParam = new Param*[NB_PARAM]{
             new Param("Nb de joueur :", 2,4,2),
             new Param("Nb de pion a aligner :", 1,6,4),
-            new Param("Nb de colonne :", 5, 15,10),
-            new Param("Nb de ligne :", 5, 12,8),
-            new Param("Vitesse descente pion :",40,200,80),
+            new Param("Nb de colonne :", 5, 25,10),
+            new Param("Nb de ligne :", 5, 15,8),
+            new Param("Vitesse descente pion :",20,200,80),
             new Param("Timer (=temps par coups) :",5,100,20)
     };
     for (int i = 0; i < NB_PARAM; ++i) {
