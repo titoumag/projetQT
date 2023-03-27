@@ -315,6 +315,10 @@ CMakeFiles/projet.dir/Board.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QTimer \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qtimer.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qbasictimer.h \
+ /usr/include/c++/10/fstream /usr/include/c++/10/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/10/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/10/bits/c++io.h \
+ /usr/include/c++/10/bits/fstream.tcc \
  /home/tmagnin4/CLionProjects/projetQT/Board.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \

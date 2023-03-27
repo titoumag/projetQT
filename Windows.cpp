@@ -192,16 +192,25 @@ bool Windows::coupAutorise() const {
 }
 
 void Windows::keyPressEvent(QKeyEvent *event) {
-    if (event->key()==Qt::Key_S && hbox->count() > 0){
+    if (event->key()==Qt::Key_S && hbox->count() > 0){//une partie est deja lancée
         std::ofstream file("save.txt");
+        file << tempsPartie << std::endl;
+        file << timerActif << std::endl;
         board->saveGame(file);
         file.close();
+        labelMessage->setText("Partie enregistrée");
     }
     if (event->key()==Qt::Key_L && !reseau->isConnected){
         std::ifstream file("save.txt");
-        int width = board->loadGame(file);
+        if (!file.fail()) {
+            file >> tempsPartie;
+            file >> timerActif;
+            int width = board->loadGame(file);
+            setButtonLine(width);
+            label->setText("Le joueur " + QString::number(board->joueurActuel() + 1) + " commence");
+            tempsTimer= tempsPartie;
+            timer->start(10);
+        }
         file.close();
-        setButtonLine(width);
-        label->setText("Le joueur "+QString::number(board->joueurActuel()+1)+" commence");
     }
 }

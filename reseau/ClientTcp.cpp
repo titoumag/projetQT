@@ -23,16 +23,16 @@ void ClientTcp::erreurSocket(QAbstractSocket::SocketError erreur)
     switch(erreur) // On affiche un message différent selon l'erreur qu'on nous indique
     {
         case QAbstractSocket::HostNotFoundError:
-            std::cout<<"<em>ERREUR : le serveur n'a pas pu être trouvé.Vérifiez l'IP et le port.</em>"<<std::endl;
+            std::cerr<<"ERREUR : le serveur n'a pas pu être trouvé. Verifiez l'IP et le port."<<std::endl;
             break;
         case QAbstractSocket::ConnectionRefusedError:
-            std::cout<<"<em>ERREUR : le serveur a refusé la connexion. Vérifiez si le programme \"serveur\" a bien été lancé. Vérifiez aussi l'IP et leport.</em>"<<std::endl;
+            std::cerr<<"ERREUR : le serveur a refuse la connexion. Verifiez si le serveur a bien ete lance. Verifiez aussi l'IP et le port."<<std::endl;
             break;
         case QAbstractSocket::RemoteHostClosedError:
-            std::cout<<"<em>ERREUR : le serveur a coupé la connexion.</em>"<<std::endl;
+            std::cerr<<"ERREUR : le serveur a coupe la connexion."<<std::endl;
             break;
         default:
-            std::cout<<"<em>ERREUR : "<< soc->errorString().data() <<std::endl;
+            std::cerr<<"ERREUR : "<< soc->errorString().data() <<std::endl;
     }
 }
 

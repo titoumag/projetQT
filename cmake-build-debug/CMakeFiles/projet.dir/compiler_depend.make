@@ -370,6 +370,11 @@ CMakeFiles/projet.dir/Board.cpp.o: /home/tmagnin4/CLionProjects/projetQT/Board.c
   /usr/include/x86_64-linux-gnu/qt5/QtCore/QTimer \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qtimer.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qbasictimer.h \
+  /usr/include/c++/10/fstream \
+  /usr/include/c++/10/bits/codecvt.h \
+  /usr/include/x86_64-linux-gnu/c++/10/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/10/bits/c++io.h \
+  /usr/include/c++/10/bits/fstream.tcc \
   /home/tmagnin4/CLionProjects/projetQT/Board.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \
@@ -1103,6 +1108,8 @@ CMakeFiles/projet.dir/Windows.cpp.o: /home/tmagnin4/CLionProjects/projetQT/Windo
   /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
   /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
   /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QCheckBox \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qcheckbox.h \
   /home/tmagnin4/CLionProjects/projetQT/Param.h \
   /home/tmagnin4/CLionProjects/projetQT/Windows.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QHBoxLayout \
@@ -1118,7 +1125,20 @@ CMakeFiles/projet.dir/Windows.cpp.o: /home/tmagnin4/CLionProjects/projetQT/Windo
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgridlayout.h \
   /home/tmagnin4/CLionProjects/projetQT/Board.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QFrame \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qframe.h
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qframe.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtGui/QKeyEvent \
+  /usr/include/x86_64-linux-gnu/qt5/QtGui/qevent.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qcoreevent.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qurl.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qfile.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qfiledevice.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtGui/qvector2d.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtGui/qtouchdevice.h \
+  /usr/include/c++/10/fstream \
+  /usr/include/c++/10/bits/codecvt.h \
+  /usr/include/x86_64-linux-gnu/c++/10/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/10/bits/c++io.h \
+  /usr/include/c++/10/bits/fstream.tcc
 
 CMakeFiles/projet.dir/main.cpp.o: /home/tmagnin4/CLionProjects/projetQT/main.cpp \
   /usr/include/stdc-predef.h \
@@ -2948,6 +2968,10 @@ projet_autogen/mocs_compilation.cpp:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QApplication:
 
+/usr/include/x86_64-linux-gnu/qt5/QtGui/QKeyEvent:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qcheckbox.h:
+
 /usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
 
 /usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
@@ -2999,6 +3023,12 @@ projet_autogen/mocs_compilation.cpp:
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QHBoxLayout:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QFrame:
+
+/usr/include/c++/10/bits/fstream.tcc:
+
+/usr/include/x86_64-linux-gnu/c++/10/bits/c++io.h:
+
+/usr/include/c++/10/bits/codecvt.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qbasictimer.h:
 
@@ -3450,6 +3480,8 @@ projet_autogen/mocs_compilation.cpp:
 
 /usr/include/c++/10/new:
 
+/usr/include/c++/10/fstream:
+
 /usr/include/asm-generic/errno-base.h:
 
 /usr/include/x86_64-linux-gnu/bits/time64.h:
@@ -3491,6 +3523,8 @@ projet_autogen/mocs_compilation.cpp:
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+
+/usr/include/x86_64-linux-gnu/c++/10/bits/basic_file.h:
 
 /usr/include/c++/10/bits/vector.tcc:
 
@@ -3635,6 +3669,8 @@ projet_autogen/mocs_compilation.cpp:
 /usr/include/c++/10/iostream:
 
 /usr/include/c++/10/system_error:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QCheckBox:
 
 /usr/include/c++/10/bits/nested_exception.h:
 
